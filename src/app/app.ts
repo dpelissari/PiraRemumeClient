@@ -1,9 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { NavMenu } from "../Components/navmenu/nav-menu";
 
 @Component({
+  standalone: true,
   selector: 'app-root',
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, NavMenu],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
