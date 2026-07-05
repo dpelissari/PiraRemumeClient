@@ -1,0 +1,12 @@
+<!-- Estados da requisição: carregando, erro, lista -->
+@if (carregando()) {
+  <p>Carregando...</p>
+} @else if (erro()) {
+  <p>{{ erro() }}</p>
+} @else {
+  <ul>
+    @for (fab of fabricantes(); track fab.id) {
+      <li>Id: {{fab.id}}, Nome: {{ fab.nomeFantasia }} —  {{ fab.cnpj }}</li>
+    }
+  </ul>
+}
