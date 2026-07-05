@@ -1,6 +1,6 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { NavMenu } from "../Components/navmenu/nav-menu";
+import { NavMenu } from "../components/navmenu/nav-menu";
 
 @Component({
   standalone: true,

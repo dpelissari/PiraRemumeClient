@@ -1,0 +1,12 @@
+<!-- Estados da requisição: carregando, erro, lista -->
+@if (carregando()) {
+  <p>Carregando...</p>
+} @else if (erro()) {
+  <p>{{ erro() }}</p>
+} @else {
+  <ul>
+    @for (med of medicamentos(); track med.id) {
+      <li>{{ med.nome }} — estoque: {{ med.qtdeDisponivel }}</li>
+    }
+  </ul>
+}
