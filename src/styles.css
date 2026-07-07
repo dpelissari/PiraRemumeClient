@@ -1,1 +1,11 @@
-/* You can add global styles to this file, and also import other style files */
+@import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
+:root {
+  --cor-primaria: #0b3d4a;
+  --cor-secundaria: #a8c5cc;
+}
+
+.ff-noto {
+    font-family: "Noto Sans", sans-serif
+}

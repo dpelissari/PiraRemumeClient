@@ -1,4 +1,31 @@
-<nav>
-  <a routerLink="/medicamentos" routerLinkActive="active">Medicamentos</a>
-  <a routerLink="/fabricantes" routerLinkActive="active">Fabricantes</a>
-</nav>
+<div class="nav-menu ff-noto">
+  <div class="container mx-auto flex justify-between items-center px-4 py-2">
+    <div class="flex gap-4 items-center">
+      <span routerLink="" routerLinkActive="active" class="logo flex items-center">MC</span>
+      <span routerLink="" routerLinkActive="active" class="appname">MedClient</span>
+      <span class="badge text-sm hidden sm:inline-block">Fármacia Popular</span>
+    </div>
+    <button
+      type="button"
+      class="md:hidden p-2"
+      (click)="menuAberto.set(!menuAberto())"
+      aria-label="Abrir menu">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+          d="M4 6h16M4 12h16M4 18h16" />
+      </svg>
+    </button>
+    <nav class="hidden md:flex gap-4">
+      <a routerLink="/medicamentos" routerLinkActive="active" class="font-medium text-lg">Medicamentos</a>
+      <a routerLink="/fabricantes" routerLinkActive="active" class="font-medium text-lg">Fabricantes</a>
+      <a routerLink="/principios-ativos" routerLinkActive="active" class="font-medium text-lg">Princípios ativos</a>
+    </nav>
+  </div>
+  @if (menuAberto()) {
+    <nav class="md:hidden flex flex-col gap-2 px-4 pb-4">
+      <a routerLink="/medicamentos" routerLinkActive="active" class="font-medium text-lg" (click)="menuAberto.set(false)">Medicamentos</a>
+      <a routerLink="/fabricantes" routerLinkActive="active" class="font-medium text-lg" (click)="menuAberto.set(false)">Fabricantes</a>
+      <a routerLink="/principios-ativos" routerLinkActive="active" class="font-medium text-lg" (click)="menuAberto.set(false)">Princípios ativos</a>
+    </nav>
+  }
+</div>

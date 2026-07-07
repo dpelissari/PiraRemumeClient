@@ -1,4 +1,31 @@
-h1 {
-    color:red;
-    font-size:40px;
+.nav-menu {
+    padding:20px;
+    border-bottom:1px solid var(--cor-secundaria);
+}
+
+.nav-menu nav a {
+    color: var(--cor-primaria);
+}
+
+.nav-menu nav a:hover{
+    color:var(--cor-secundaria);
+}
+
+.logo {
+    width:28px;
+    height:28px;
+    background-color:var(--cor-primaria);
+    border-radius:4px;
+    color:#f8fafc;
+}
+
+.logo:hover{
+    cursor:pointer;
+}
+
+.badge {
+    color:var(--cor-primaria);
+    border:1px solid var(--cor-primaria);
+    border-radius:4px;
+    padding:0 10px;
 }

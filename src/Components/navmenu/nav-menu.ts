@@ -1,11 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
-  selector: 'nav-menu',
+  selector: 'app-nav-menu',
   standalone: true,
   imports: [RouterLink, RouterLinkActive],
   templateUrl: './nav-menu.html',
   styleUrl: './nav-menu.css',
 })
-export class NavMenu {}
+export class NavMenu {
+  menuAberto = signal(false);
+}
