@@ -9,3 +9,8 @@
 .ff-noto {
     font-family: "Noto Sans", sans-serif
 }
+
+section {
+  padding-top:40px;
+  padding-bottom:40px;
+}

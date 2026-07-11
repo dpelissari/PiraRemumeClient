@@ -1,0 +1,25 @@
+<div class="tipo-consulta grid grid-cols-3">
+    <button
+        class="font-medium ff-noto"
+        [class.ativo]="buscaAtiva() === 'medicamento'"
+        (click)="setTipoBusca('medicamento')"
+    >
+        Nome do Medicamento
+    </button>
+
+    <button
+        class="font-medium ff-noto"
+        [class.ativo]="buscaAtiva() === 'principio-ativo'"
+        (click)="setTipoBusca('principio-ativo')"
+    >
+        Principio Ativo
+    </button>
+
+    <button
+        class="font-medium ff-noto"
+        [class.ativo]="buscaAtiva() === 'classe-terapeutica'"
+        (click)="setTipoBusca('classe-terapeutica')"
+    >
+        Categoria Terapeutica
+    </button>
+</div>
