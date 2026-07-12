@@ -1,3 +1,5 @@
+import { Fabricante } from "./fabricante.models";
+
 // Espelha o enum FormaFarmaceutica da API (.NET serializa como número)
 export enum FormaFarmaceutica {
   Comprimido = 0,
@@ -14,4 +16,5 @@ export interface Medicamento {
   disponivel: boolean;
   qtdeDisponivel: number;
   fabricanteId: string;
+  fabricante: Fabricante;
 }
