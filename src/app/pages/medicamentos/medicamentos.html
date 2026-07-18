@@ -6,7 +6,7 @@
 } @else {
   <ul>
     @for (med of medicamentos(); track med.id) {
-      <li>{{ med.nome }} — estoque: {{ med.qtdeDisponivel }}</li>
+      <li>{{ med.nome }}</li>
     }
   </ul>
 }

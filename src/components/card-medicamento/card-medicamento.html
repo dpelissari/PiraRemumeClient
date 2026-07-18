@@ -1,7 +1,7 @@
 <div class="flex items-center justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
   <div class="flex-1">
     <span class="text-xs font-semibold uppercase tracking-wide text-cyan-700">
-      Forma farmaceutica
+       {{ medicamento()?.classeTerapeutica | classeTerapeuticaDescription }}
     </span>
 
     <h3 class="mt-1 text-xl font-bold text-gray-900">
@@ -9,7 +9,7 @@
     </h3>
 
     <p class="mt-2 text-sm text-gray-500">
-        {{ medicamento()?.formaFarmaceutica}}
+      {{ medicamento()?.formaFarmaceutica | formaFarmaceuticaDescription }}
     </p>
 
     <hr class="my-3 border-gray-100" />
@@ -19,9 +19,15 @@
         {{ medicamento()?.fabricante?.nomeFantasia }}
       </span>
 
-      <span class="flex items-center gap-1.5 text-sm text-emerald-600">
-        <span class="h-2 w-2 rounded-full bg-emerald-500"></span>
-        {{medicamento()?.disponivel === true ? 'Disponivel' : 'Indisponivel' }}
+      <span 
+        class="flex items-center gap-1.5 text-sm "
+        [class]="medicamento()?.fornecidoPeloSUS === true ? 'text-emerald-600' : 'text-red-600'" 
+        >
+        <span
+        class="h-2 w-2 rounded-full"
+        [class]="medicamento()?.fornecidoPeloSUS === true ? 'bg-emerald-500' : 'bg-red-600'" 
+        ></span>
+         {{medicamento()?.fornecidoPeloSUS === true ? 'DISPONIVEL NO SUS' : 'INDISPONIVEL NO SUS' }}
       </span>
     </div>
   </div>
