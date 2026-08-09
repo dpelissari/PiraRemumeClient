@@ -6,24 +6,27 @@
           Medicamentos
         </h2>
         <p class="ff-noto text-sm text-slate-500">
-          @if (carregando()) {
+          @if (carregandoInicial()) {
             Carregando resultados…
           } @else if (erro()) {
             {{ erro() }}
           } @else {
-            {{ medicamentos().length }} resultado(s) encontrados
+            {{ total() }} resultado(s) · página {{ pagina() }} de {{ totalPaginas() }}
+            @if (carregando()) {
+              <span class="ml-1 text-slate-400">· atualizando…</span>
+            }
           }
         </p>
       </div>
     </div>
 
-    @if (carregando()) {
+    @if (carregandoInicial()) {
       <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        @for (_ of [1, 2, 3, 4]; track $index) {
+        @for (_ of [1, 2, 3, 4, 5, 6, 7, 8]; track $index) {
           <div class="h-40 animate-pulse rounded-xl border border-slate-200 bg-white"></div>
         }
       </div>
-    } @else if (erro()) {
+    } @else if (erro() && medicamentos().length === 0) {
       <div class="rounded-xl border border-red-200 bg-red-50 px-4 py-6 text-red-700">
         {{ erro() }}
       </div>
@@ -32,11 +35,43 @@
         Nenhum medicamento encontrado.
       </div>
     } @else {
-      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      <div
+        class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        [class.opacity-60]="carregando()"
+        [class.pointer-events-none]="carregando()"
+      >
         @for (med of medicamentos(); track med.id) {
           <app-card-medicamento [medicamento]="med" />
         }
       </div>
+
+      @if (totalPaginas() > 1) {
+        <div class="mt-8 flex flex-col items-center justify-between gap-3 sm:flex-row">
+          <p class="ff-noto text-sm text-slate-500">
+            Página {{ pagina() }} de {{ totalPaginas() }}
+          </p>
+
+          <div class="flex items-center gap-2">
+            <button
+              type="button"
+              class="ff-noto rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm font-medium text-[var(--cor-primaria)] transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-40"
+              [disabled]="!temAnterior() || carregando()"
+              (click)="paginaAnterior()"
+            >
+              Anterior
+            </button>
+
+            <button
+              type="button"
+              class="ff-noto rounded-lg bg-[var(--cor-primaria)] px-4 py-2 text-sm font-medium text-white transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-40"
+              [disabled]="!temProxima() || carregando()"
+              (click)="paginaProxima()"
+            >
+              Próxima
+            </button>
+          </div>
+        </div>
+      }
     }
   </div>
 </section>

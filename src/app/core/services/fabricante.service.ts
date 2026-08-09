@@ -9,8 +9,7 @@ import { ResultadoPaginado } from '../models/paginacao.models';
 export class FabricanteService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = `${environment.apiUrl}/fabricantes`;
-
-  // endpoint público — API retorna ResultadoPaginado, não Fabricante[]
+  
   listar(pagina = 1, tamanho = 100): Observable<Fabricante[]> {
     const params = new HttpParams()
       .set('pagina', pagina)

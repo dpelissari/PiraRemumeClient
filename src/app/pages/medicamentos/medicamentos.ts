@@ -17,8 +17,8 @@ export class Medicamentos implements OnInit {
   ngOnInit(): void {
     // Dispara ao abrir a página (/medicamentos)
     this.medicamentoService.listar().subscribe({
-      next: (dados) => {
-        this.medicamentos.set(dados);
+      next: (resultado) => {
+        this.medicamentos.set(resultado.itens ?? []);
         this.carregando.set(false);
       },
       error: (err) => {
