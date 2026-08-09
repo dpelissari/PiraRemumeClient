@@ -1,38 +1,49 @@
-<div class="flex items-center justify-between rounded-xl border border-gray-200 bg-white p-5 shadow-sm">
-  <div class="flex-1">
-    <span class="text-xs font-semibold uppercase tracking-wide text-cyan-700">
-       {{ medicamento()?.classeTerapeutica | classeTerapeuticaDescription }}
+<div
+  class="group flex h-full cursor-pointer items-stretch justify-between rounded-xl border border-slate-200 bg-white p-5 shadow-sm transition hover:-translate-y-0.5 hover:border-[var(--cor-secundaria)] hover:shadow-md"
+>
+  <div class="flex min-h-0 flex-1 flex-col">
+    <span class="text-xs font-semibold tracking-wide text-[var(--cor-primaria)] uppercase">
+      {{ medicamento()?.classeTerapeutica | classeTerapeuticaDescription }}
     </span>
 
-    <h3 class="mt-1 text-xl font-bold text-gray-900">
-      {{ medicamento()?.nome}}
+    <h3 class="ff-noto mt-1 text-lg font-bold text-[var(--cor-primaria)] md:text-xl">
+      {{ medicamento()?.nome }}
     </h3>
 
-    <p class="mt-2 text-sm text-gray-500">
+    <p class="mt-2 text-sm text-slate-500">
       {{ medicamento()?.formaFarmaceutica | formaFarmaceuticaDescription }}
     </p>
 
-    <hr class="my-3 border-gray-100" />
+    <div class="mt-auto">
+      <hr class="my-3 border-slate-100" />
 
-    <div class="flex items-center justify-between">
-      <span class="text-sm text-gray-600">
-        {{ medicamento()?.fabricante?.nomeFantasia }}
-      </span>
+      <div class="flex items-center justify-between gap-2">
+        <span class="truncate text-sm text-slate-600">
+          {{ medicamento()?.fabricante?.nomeFantasia }}
+        </span>
 
-      <span 
-        class="flex items-center gap-1.5 text-sm "
-        [class]="medicamento()?.fornecidoPeloSUS === true ? 'text-emerald-600' : 'text-red-600'" 
-        >
         <span
-        class="h-2 w-2 rounded-full"
-        [class]="medicamento()?.fornecidoPeloSUS === true ? 'bg-emerald-500' : 'bg-red-600'" 
-        ></span>
-         {{medicamento()?.fornecidoPeloSUS === true ? 'DISPONIVEL NO SUS' : 'INDISPONIVEL NO SUS' }}
-      </span>
+          class="flex shrink-0 items-center gap-1.5 text-xs font-medium tracking-wide uppercase"
+          [class]="medicamento()?.fornecidoPeloSUS === true ? 'text-emerald-600' : 'text-rose-600'"
+        >
+          <span
+            class="h-2 w-2 rounded-full"
+            [class]="medicamento()?.fornecidoPeloSUS === true ? 'bg-emerald-500' : 'bg-rose-500'"
+          ></span>
+          {{ medicamento()?.fornecidoPeloSUS === true ? 'Fornecido' : 'Não fornecido' }}
+        </span>
+      </div>
     </div>
   </div>
-  
-  <svg class="ml-2 h-5 w-5 flex-shrink-0 text-gray-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+
+  <svg
+    class="ml-2 h-5 w-5 shrink-0 self-center text-slate-300 transition group-hover:translate-x-0.5 group-hover:text-[var(--cor-primaria)]"
+    fill="none"
+    viewBox="0 0 24 24"
+    stroke="currentColor"
+    stroke-width="2"
+    aria-hidden="true"
+  >
     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
   </svg>
 </div>

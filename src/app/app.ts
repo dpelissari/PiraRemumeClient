@@ -5,6 +5,7 @@ import { RouterOutlet } from '@angular/router';
 import { NavMenu } from "../components/navmenu/nav-menu";
 import { PainelConsulta } from "../components/painel-consulta/painel-consulta";
 import { ListaMedicamentos } from '../components/lista-medicamentos/lista-medicamentos';
+import { Rodape } from "../components/rodape/rodape";
 
 @Component({
   standalone: true,
@@ -13,8 +14,9 @@ import { ListaMedicamentos } from '../components/lista-medicamentos/lista-medica
     RouterOutlet,
     NavMenu,
     PainelConsulta,
-    ListaMedicamentos
-  ],
+    ListaMedicamentos,
+    Rodape
+],
   templateUrl: './app.html',
   styleUrl: './app.css'
 })
