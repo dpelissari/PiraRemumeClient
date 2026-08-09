@@ -1,5 +1,5 @@
-@import 'tailwindcss';
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import 'tailwindcss';
 
 :root {
   --cor-primaria: #0b3d4a;
@@ -7,11 +7,11 @@
 }
 
 .ff-noto {
-    font-family: "Noto Sans", sans-serif
+  font-family: "Noto Sans", sans-serif;
 }
 
-section {
-  width:100%;
-  padding-top:40px;
-  padding-bottom:40px;
+body {
+  margin: 0;
+  background: #f8fafc;
+  color: #0f172a;
 }

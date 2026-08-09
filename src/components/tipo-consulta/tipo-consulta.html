@@ -1,25 +1,28 @@
-<div class="tipo-consulta grid grid-cols-3">
-    <button
-        class="font-medium ff-noto"
-        [class.ativo]="buscaAtiva() === 'medicamento'"
-        (click)="setTipoBusca('medicamento')"
-    >
-        Nome do Medicamento
-    </button>
+<div class="grid grid-cols-1 gap-1 rounded-xl border border-slate-200 bg-white p-1 shadow-sm sm:grid-cols-3">
+  <button
+    type="button"
+    class="tab ff-noto rounded-lg px-3 py-2.5 text-sm font-medium transition sm:text-base"
+    [class.ativo]="buscaAtiva() === 'medicamento'"
+    (click)="setTipoBusca('medicamento')"
+  >
+    Nome do Medicamento
+  </button>
 
-    <button
-        class="font-medium ff-noto"
-        [class.ativo]="buscaAtiva() === 'principio-ativo'"
-        (click)="setTipoBusca('principio-ativo')"
-    >
-        Principio Ativo
-    </button>
+  <button
+    type="button"
+    class="tab ff-noto rounded-lg px-3 py-2.5 text-sm font-medium transition sm:text-base"
+    [class.ativo]="buscaAtiva() === 'principio-ativo'"
+    (click)="setTipoBusca('principio-ativo')"
+  >
+    Princípio Ativo
+  </button>
 
-    <button
-        class="font-medium ff-noto"
-        [class.ativo]="buscaAtiva() === 'classe-terapeutica'"
-        (click)="setTipoBusca('classe-terapeutica')"
-    >
-        Categoria Terapeutica
-    </button>
+  <button
+    type="button"
+    class="tab ff-noto rounded-lg px-3 py-2.5 text-sm font-medium transition sm:text-base"
+    [class.ativo]="buscaAtiva() === 'classe-terapeutica'"
+    (click)="setTipoBusca('classe-terapeutica')"
+  >
+    Categoria Terapêutica
+  </button>
 </div>

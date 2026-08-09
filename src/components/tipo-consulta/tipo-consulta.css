@@ -1,21 +1,22 @@
-.tipo-consulta {
-    border:1px solid #ddd;
-    border-radius:8px;
-    background:#fff;
+:host {
+  display: block;
 }
 
-button {
-    border-radius:8px;
-    font-size:18px;
-    padding: 8px;
-    color:var(--cor-segundaria);
+.tab {
+  color: var(--cor-primaria);
 }
 
-button:hover {
-    cursor: pointer;
+.tab:hover {
+  background-color: #f8fafc;
 }
 
-button.ativo {
-    background-color: var(--cor-primaria);
-    color:#fff;
+.tab.ativo {
+  background-color: var(--cor-primaria);
+  color: #fff;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
+}
+
+.tab.ativo:hover {
+  filter: brightness(1.08);
+  background-color: var(--cor-primaria);
 }
