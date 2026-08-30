@@ -11,7 +11,11 @@
           } @else if (erro()) {
             {{ erro() }}
           } @else {
-            {{ total() }} resultado(s) · página {{ pagina() }} de {{ totalPaginas() }}
+            {{ total() }} resultado(s)
+            @if (termo()) {
+              para “{{ termo() }}”
+            }
+            · página {{ pagina() }} de {{ totalPaginas() }}
             @if (carregando()) {
               <span class="ml-1 text-slate-400">· atualizando…</span>
             }

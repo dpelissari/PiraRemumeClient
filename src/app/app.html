@@ -1,7 +1,7 @@
 <main class="main">
   <app-nav-menu />
-  <app-painel-consulta />
-  <app-lista-medicamentos />
+  <app-painel-consulta (consultou)="aplicarConsulta($event)" />
+  <app-lista-medicamentos [termo]="filtroTermo()" [tipo]="filtroTipo()" />
   <app-rodape />
 </main>
 <router-outlet />

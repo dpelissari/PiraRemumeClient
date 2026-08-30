@@ -2,7 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from '../../../environments/environment';
-import { Medicamento } from '../models/medicamento.models';
+import { Medicamento, TipoFiltroMedicamento } from '../models/medicamento.models';
 import { ResultadoPaginado } from '../models/paginacao.models';
 
 @Injectable({ providedIn: 'root' })
@@ -10,10 +10,23 @@ export class MedicamentoService {
   private readonly http = inject(HttpClient);
   private readonly baseUrl = `${environment.apiUrl}/medicamentos`;
 
-  listar(pagina = 1, tamanho = 12): Observable<ResultadoPaginado<Medicamento>> {
-    const params = new HttpParams()
+  listar(
+    pagina = 1,
+    tamanho = 12,
+    termo?: string,
+    tipo?: TipoFiltroMedicamento,
+  ): Observable<ResultadoPaginado<Medicamento>> {
+    let params = new HttpParams()
       .set('pagina', pagina)
       .set('tamanho', tamanho);
+
+    const termoLimpo = termo?.trim();
+    if (termoLimpo) {
+      params = params.set('termo', termoLimpo);
+      if (tipo) {
+        params = params.set('tipo', tipo);
+      }
+    }
 
     return this.http.get<ResultadoPaginado<Medicamento>>(this.baseUrl, { params });
   }

@@ -1,6 +1,7 @@
 import { Component, output, signal } from '@angular/core';
+import { TipoFiltroMedicamento } from '../../app/core/models/medicamento.models';
 
-type TipoBusca = 'medicamento' | 'principio-ativo' | 'classe-terapeutica';
+type TipoBusca = 'medicamento' | 'classe-terapeutica';
 
 @Component({
   selector: 'app-tipo-consulta',
@@ -10,30 +11,29 @@ type TipoBusca = 'medicamento' | 'principio-ativo' | 'classe-terapeutica';
 })
 
 export class TipoConsulta {
- 
- protected buscaAtiva = signal<TipoBusca>('medicamento');
+  protected buscaAtiva = signal<TipoBusca>('medicamento');
 
- setTipoBusca(tipo:TipoBusca):void{
+  mudouPlaceholder = output<string>();
+  tipoSelecionado = output<TipoFiltroMedicamento>();
 
-  this.buscaAtiva.set(tipo);
-  console.log(`Buscando por: ${tipo}`);
-  
-  if (tipo == 'medicamento')
-    this.alterarPlaceholder('Ex: Amoxilina, Metformina, etc.');
+  setTipoBusca(tipo: TipoBusca): void {
+    this.buscaAtiva.set(tipo);
+    this.tipoSelecionado.emit(this.paraTipoApi(tipo));
 
-  if (tipo == 'principio-ativo')
-    this.alterarPlaceholder('Ex: Omeprazol, Captopril, etc.');
+    if (tipo === 'medicamento') {
+      this.alterarPlaceholder('Ex: Amoxilina, Metformina, etc.');
+    }
 
-  if (tipo == 'classe-terapeutica')
-    this.alterarPlaceholder('Ex: Antibiótico, Anti-hipertensivo…');
- }
+    if (tipo === 'classe-terapeutica') {
+      this.alterarPlaceholder('Ex: Antibiótico, Anti-hipertensivo…');
+    }
+  }
 
- // evento que comunica o pai se o placeholder mudou
- mudouPlaceholder = output<string>();
- 
- // altera o placeholder do input no componente pai com base no click no tipo
- alterarPlaceholder(novoPlaceholder:string){
-  this.mudouPlaceholder.emit(novoPlaceholder);
- }
+  alterarPlaceholder(novoPlaceholder: string): void {
+    this.mudouPlaceholder.emit(novoPlaceholder);
+  }
 
+  private paraTipoApi(tipo: TipoBusca): TipoFiltroMedicamento {
+    return tipo === 'classe-terapeutica' ? 'classeTerapeutica' : 'nome';
+  }
 }
