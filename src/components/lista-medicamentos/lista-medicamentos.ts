@@ -39,7 +39,7 @@ export class ListaMedicamentos implements OnInit {
         this.medicamentos.set(resultado.itens ?? []);
         this.pagina.set(resultado.pagina);
         this.total.set(resultado.total);
-        this.totalPaginas.set(Math.max(resultado.totalPaginas, 1));
+        this.totalPaginas.set(this.resolverTotalPaginas(resultado.totalPaginas, resultado.total, resultado.tamanho));
         this.carregando.set(false);
         this.carregandoInicial.set(false);
       },
@@ -60,5 +60,15 @@ export class ListaMedicamentos implements OnInit {
   paginaProxima(): void {
     if (!this.temProxima() || this.carregando()) return;
     this.carregar(this.pagina() + 1);
+  }
+
+  private resolverTotalPaginas(totalPaginas: number, total: number, tamanho?: number): number {
+    if (Number.isFinite(totalPaginas) && totalPaginas >= 1) {
+      return totalPaginas;
+    }
+
+    const tamanhoEfetivo = tamanho && tamanho > 0 ? tamanho : this.tamanhoPagina;
+    const calculado = Math.ceil((total || 0) / tamanhoEfetivo);
+    return Math.max(Number.isFinite(calculado) ? calculado : 1, 1);
   }
 }
