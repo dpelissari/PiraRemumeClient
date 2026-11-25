@@ -20,6 +20,14 @@
         <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Consulta</a>
         <a routerLink="/farmacias" routerLinkActive="active">Farmácias</a>
         <a routerLink="/sobre" routerLinkActive="active">Sobre</a>
+        @if (ehAdmin()) {
+          <a routerLink="/admin/sincronismo" routerLinkActive="active">Sincronismo</a>
+          <button type="button" class="text-muted hover:text-ink" (click)="sair()">
+            Sair
+          </button>
+        } @else {
+          <a routerLink="/login" class="btn-nav">Entrar</a>
+        }
       </nav>
     </div>
   </div>
@@ -28,6 +36,12 @@
       <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="menuAberto.set(false)">Consulta</a>
       <a routerLink="/farmacias" routerLinkActive="active" (click)="menuAberto.set(false)">Farmácias</a>
       <a routerLink="/sobre" routerLinkActive="active" (click)="menuAberto.set(false)">Sobre</a>
+      @if (ehAdmin()) {
+        <a routerLink="/admin/sincronismo" routerLinkActive="active" (click)="menuAberto.set(false)">Sincronismo</a>
+        <button type="button" class="text-left text-[var(--muted)]" (click)="sair()">Sair</button>
+      } @else {
+        <a routerLink="/login" routerLinkActive="active" (click)="menuAberto.set(false)">Entrar</a>
+      }
     </nav>
   }
 </div>
