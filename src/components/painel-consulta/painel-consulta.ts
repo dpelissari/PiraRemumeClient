@@ -1,8 +1,9 @@
-import { Component, output, signal } from '@angular/core';
+import { Component, ElementRef, inject, output, signal } from '@angular/core';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
-import { debounceTime, distinctUntilChanged, Subject } from 'rxjs';
+import { catchError, debounceTime, distinctUntilChanged, fromEvent, of, Subject } from 'rxjs';
 import { TipoConsulta } from '../tipo-consulta/tipo-consulta';
 import { TipoFiltroMedicamento } from '../../app/core/models/medicamento.models';
+import { MedicamentoService } from '../../app/core/services/medicamento.service';
 
 @Component({
   selector: 'app-painel-consulta',
@@ -11,18 +12,54 @@ import { TipoFiltroMedicamento } from '../../app/core/models/medicamento.models'
   styleUrl: './painel-consulta.css',
 })
 export class PainelConsulta {
+  private readonly medicamentoService = inject(MedicamentoService);
+  private readonly host = inject(ElementRef<HTMLElement>);
   private readonly termo$ = new Subject<string>();
 
   protected termoDigitado = signal('');
+  protected grupoSelecionado = signal('');
+  protected grupos = signal<string[]>([]);
   protected tipoFiltro = signal<TipoFiltroMedicamento>('nome');
-  protected placeHolder = signal('Ex: Amoxilina, Metformina, etc.');
+  protected placeHolder = signal('Dipirona, Metformina, Amoxicilina');
+  protected menuGruposAberto = signal(false);
 
   consultou = output<{ termo: string; tipo: TipoFiltroMedicamento }>();
 
   constructor() {
+    this.carregarGrupos();
+
     this.termo$
       .pipe(debounceTime(300), distinctUntilChanged(), takeUntilDestroyed())
       .subscribe(() => this.buscar());
+
+    fromEvent<PointerEvent>(document, 'pointerdown')
+      .pipe(takeUntilDestroyed())
+      .subscribe((evento) => {
+        if (!this.menuGruposAberto()) return;
+        if (!this.host.nativeElement.contains(evento.target as Node)) {
+          this.menuGruposAberto.set(false);
+        }
+      });
+
+    fromEvent<KeyboardEvent>(document, 'keydown')
+      .pipe(takeUntilDestroyed())
+      .subscribe((evento) => {
+        if (evento.key === 'Escape') {
+          this.menuGruposAberto.set(false);
+        }
+      });
+  }
+
+  private carregarGrupos(): void {
+    this.medicamentoService
+      .listarGrupos()
+      .pipe(
+        catchError((err) => {
+          console.error(err);
+          return of<string[]>([]);
+        }),
+      )
+      .subscribe((grupos) => this.grupos.set(grupos));
   }
 
   aoDigitar(evento: Event): void {
@@ -31,21 +68,32 @@ export class PainelConsulta {
     this.termo$.next(input.value);
   }
 
-  atualizarTipo(tipo: TipoFiltroMedicamento): void {
-    this.tipoFiltro.set(tipo);
-    if (this.termoDigitado().trim()) {
-      this.buscar();
-    }
+  alternarGrupos(): void {
+    this.menuGruposAberto.update((aberto) => !aberto);
   }
 
-  atualizarPlaceHolder(texto: string): void {
-    this.placeHolder.set(texto);
+  escolherGrupo(grupo: string): void {
+    this.grupoSelecionado.set(grupo);
+    this.menuGruposAberto.set(false);
+    this.buscar();
+  }
+
+  atualizarTipo(tipo: TipoFiltroMedicamento): void {
+    this.tipoFiltro.set(tipo);
+    this.termoDigitado.set('');
+    this.grupoSelecionado.set('');
+    this.menuGruposAberto.set(false);
+    if (tipo === 'grupo' && this.grupos().length === 0) {
+      this.carregarGrupos();
+    }
+    this.buscar();
   }
 
   buscar(): void {
+    const tipo = this.tipoFiltro();
     this.consultou.emit({
-      termo: this.termoDigitado().trim(),
-      tipo: this.tipoFiltro(),
+      termo: tipo === 'grupo' ? this.grupoSelecionado() : this.termoDigitado().trim(),
+      tipo,
     });
   }
 

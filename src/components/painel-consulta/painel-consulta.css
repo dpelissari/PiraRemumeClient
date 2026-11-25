@@ -1,1 +1,46 @@
-/* Estilos do painel migrados para Tailwind no template */
+:host {
+  display: block;
+  position: relative;
+  z-index: 20;
+}
+
+.hero-consulta {
+  --ink: #111a4a;
+  --muted: rgb(17 26 74 / 0.8);
+  --faint: rgb(17 26 74 / 0.45);
+  --surface: #ffffff;
+  --line: rgb(17 26 74 / 0.12);
+  --btn: #111a4a;
+  --btn-fg: #ffffff;
+  position: relative;
+  isolation: isolate;
+  overflow: visible;
+  min-height: 36rem;
+  background-color: #9bd540;
+  background-image: radial-gradient(
+    70% 80% at 85% 45%,
+    rgb(255 255 255 / 0.22),
+    transparent 62%
+  );
+}
+
+.hero-consulta::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 0;
+  height: 3.5rem;
+  background: linear-gradient(180deg, transparent, var(--canvas));
+  pointer-events: none;
+}
+
+.hero-consulta .container {
+  position: relative;
+  z-index: 1;
+}
+
+.opcao-ativa {
+  background: rgb(17 26 74 / 0.05);
+  color: var(--ink);
+  font-weight: 500;
+}

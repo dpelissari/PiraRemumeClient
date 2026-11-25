@@ -1,17 +1,102 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
 @import 'tailwindcss';
 
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --cor-primaria: #0b3d4a;
-  --cor-secundaria: #a8c5cc;
+  --cor-primaria: #111a4a;
+  --cor-secundaria: #7c7f88;
+  --canvas: #f6f6f8;
+  --ink: #111a4a;
+  --muted: #7c7f88;
+  --faint: #a9acb6;
+  --surface: #ffffff;
+  --accent: #44b48b;
+  --line: rgb(17 26 74 / 0.1);
+  --nav: rgb(255 255 255 / 0.86);
+  --btn: #111a4a;
+  --btn-fg: #ffffff;
+  --hero: linear-gradient(180deg, #eef1f8 0%, #f6f6f8 72%);
+  --elev: 0 1px 2px rgb(17 26 74 / 0.04), 0 10px 28px rgb(17 26 74 / 0.05);
+  --elev-hover: 0 1px 2px rgb(17 26 74 / 0.06), 0 16px 36px rgb(17 26 74 / 0.08);
+  color-scheme: light;
+}
+
+.dark {
+  --cor-primaria: #e6e8f2;
+  --cor-secundaria: #9aa1b4;
+  --canvas: #10131a;
+  --ink: #e6e8f2;
+  --muted: #9aa1b4;
+  --faint: #6d7488;
+  --surface: #1a1e28;
+  --accent: #4ecb9a;
+  --line: rgb(255 255 255 / 0.1);
+  --nav: rgb(16 19 26 / 0.88);
+  --btn: #e6e8f2;
+  --btn-fg: #10131a;
+  --hero: linear-gradient(180deg, #161a24 0%, #10131a 72%);
+  --elev: 0 0 0 1px rgb(255 255 255 / 0.06);
+  --elev-hover: 0 0 0 1px rgb(255 255 255 / 0.12);
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-canvas: var(--canvas);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-line: var(--line);
+  --color-btn: var(--btn);
+  --color-btn-fg: var(--btn-fg);
 }
 
 .ff-noto {
-  font-family: "Noto Sans", sans-serif;
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+}
+
+html,
+body {
+  min-height: 100%;
 }
 
 body {
   margin: 0;
-  background: #f8fafc;
-  color: #0f172a;
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+  font-size: 15px;
+  line-height: 1.5;
+}
+
+.hero {
+  background: var(--hero);
+}
+
+button:not(:disabled),
+[type='button']:not(:disabled),
+[type='submit']:not(:disabled) {
+  cursor: pointer;
+}
+
+:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 2px;
+}
+
+input:focus-visible,
+textarea:focus-visible,
+select:focus-visible {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

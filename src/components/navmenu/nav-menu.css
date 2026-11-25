@@ -1,31 +1,45 @@
 .nav-menu {
-    padding:20px;
-    border-bottom:1px solid var(--cor-secundaria);
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--nav);
+  backdrop-filter: blur(12px);
+}
+
+.wordmark {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--ink);
+}
+
+.wordmark img {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
 }
 
 .nav-menu nav a {
-    color: var(--cor-primaria);
+  color: var(--muted);
 }
 
-.nav-menu nav a:hover{
-    color:var(--cor-secundaria);
+.nav-menu nav a:hover,
+.nav-menu nav a.active {
+  color: var(--ink);
 }
 
-.logo {
-    width:28px;
-    height:28px;
-    background-color:var(--cor-primaria);
-    border-radius:4px;
-    color:#f8fafc;
+.btn-nav {
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink) !important;
+  border-radius: 8px;
+  padding: 0.4rem 0.85rem;
+  font-weight: 500;
 }
 
-.logo:hover{
-    cursor:pointer;
-}
-
-.badge {
-    color:var(--cor-primaria);
-    border:1px solid var(--cor-primaria);
-    border-radius:4px;
-    padding:0 10px;
+.btn-nav:hover {
+  border-color: color-mix(in srgb, var(--ink) 22%, transparent);
 }

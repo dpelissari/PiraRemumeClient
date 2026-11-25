@@ -1,0 +1,69 @@
+<dialog
+  #dialog
+  class="modal-farmacia"
+  aria-labelledby="modal-farmacia-titulo"
+  (close)="aoFechar()"
+  (click)="aoCliqueFundo($event)"
+>
+  @let unidade = farmacia();
+  <div class="flex items-start justify-between gap-4">
+    <div>
+      <p class="ff-noto text-xs text-faint">{{ unidade.tipoDescricao }}</p>
+      <h2
+        id="modal-farmacia-titulo"
+        class="ff-noto mt-1 text-lg font-semibold tracking-[-0.02em] text-[var(--ink)]"
+      >
+        {{ unidade.nome }}
+      </h2>
+    </div>
+    <button
+      type="button"
+      class="ff-noto shrink-0 cursor-pointer rounded-lg px-2 py-1 text-sm text-muted hover:bg-ink/5 hover:text-[var(--ink)]"
+      (click)="fechar()"
+    >
+      Fechar
+    </button>
+  </div>
+
+  <p class="ff-noto mt-5 text-[15px] leading-relaxed text-[var(--ink)]">
+    {{ unidade.endereco }}, {{ unidade.bairro }}, Piracicaba
+  </p>
+  <a
+    class="ff-noto mt-2 inline-flex text-sm text-[var(--ink)] underline decoration-[var(--line)] underline-offset-2 hover:decoration-[var(--ink)]"
+    [href]="mapsHref(unidade)"
+    target="_blank"
+    rel="noopener noreferrer"
+  >
+    Abrir no mapa
+  </a>
+
+  <p class="ff-noto mt-5 text-sm leading-relaxed text-muted">{{ unidade.horario }}</p>
+
+  @if (unidade.telefone) {
+    <p class="ff-noto mt-2 text-sm text-muted">
+      <a class="hover:underline" [href]="telHref(unidade.telefone)">
+        {{ formatarTelefone(unidade.telefone) }}
+      </a>
+      @if (unidade.whatsapp) {
+        <a
+          class="ml-3 text-[var(--ink)] underline decoration-[var(--line)] underline-offset-2 hover:decoration-[var(--ink)]"
+          [href]="whatsappHref(unidade.telefone)"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          WhatsApp
+        </a>
+      }
+    </p>
+  }
+
+  @if (unidade.unidadesReferencia.length > 0) {
+    <p class="ff-noto mt-5 text-sm leading-relaxed text-muted">
+      Atende quem é destas unidades: {{ unidade.unidadesReferencia.join(', ') }}.
+    </p>
+  }
+
+  @if (unidade.observacao) {
+    <p class="ff-noto mt-3 text-sm leading-relaxed text-muted">{{ unidade.observacao }}</p>
+  }
+</dialog>

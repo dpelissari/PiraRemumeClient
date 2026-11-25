@@ -1,0 +1,39 @@
+<app-painel-consulta (consultou)="aplicarConsulta($event)" />
+<app-lista-medicamentos [termo]="filtroTermo()" [tipo]="filtroTipo()" />
+
+<section class="border-t border-line pt-12 pb-8 md:pt-16">
+  <div class="container mx-auto px-4">
+    <h2 class="ff-noto text-base font-medium text-[var(--ink)]">Principais dúvidas</h2>
+    <dl class="mt-8 grid gap-8 sm:grid-cols-3">
+      <div>
+        <dt class="ff-noto text-sm font-medium text-[var(--ink)]">
+          Quem pode retirar o medicamento?
+        </dt>
+        <dd class="ff-noto mt-2 text-[15px] leading-relaxed text-[var(--muted)]">
+          Quem mora em Piracicaba. Vale receita do posto, de convênio ou de médico
+          particular.
+        </dd>
+      </div>
+      <div>
+        <dt class="ff-noto text-sm font-medium text-[var(--ink)]">
+          Onde o medicamento pode ser retirado?
+        </dt>
+        <dd class="ff-noto mt-2 text-[15px] leading-relaxed text-[var(--muted)]">
+          Na farmácia municipal do seu posto, a UBS ou USF do bairro. Não é
+          retirado em farmácias particulares, como Drogal, Drogaria São Paulo e
+          outras.
+          <a routerLink="/farmacias" class="text-[var(--ink)] hover:underline">Ver farmácias</a>
+        </dd>
+      </div>
+      <div>
+        <dt class="ff-noto text-sm font-medium text-[var(--ink)]">
+          O que precisa para retirar o medicamento?
+        </dt>
+        <dd class="ff-noto mt-2 text-[15px] leading-relaxed text-[var(--muted)]">
+          A receita em dia e o cartão de saúde da cidade, válido, com o número da
+          matrícula.
+        </dd>
+      </div>
+    </dl>
+  </div>
+</section>

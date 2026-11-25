@@ -3,20 +3,15 @@
 }
 
 .tab {
-  color: var(--cor-primaria);
+  color: var(--muted);
 }
 
 .tab:hover {
-  background-color: #f8fafc;
+  color: var(--ink);
 }
 
 .tab.ativo {
-  background-color: var(--cor-primaria);
-  color: #fff;
-  box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
-}
-
-.tab.ativo:hover {
-  filter: brightness(1.08);
-  background-color: var(--cor-primaria);
+  background: var(--surface);
+  color: var(--ink);
+  box-shadow: var(--elev);
 }

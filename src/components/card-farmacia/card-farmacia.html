@@ -1,0 +1,20 @@
+<button
+  type="button"
+  class="flex h-full w-full cursor-pointer flex-col rounded-lg border-0 bg-surface p-5 text-left shadow-[var(--elev)] transition hover:shadow-[var(--elev-hover)]"
+  (click)="abrir.emit()"
+>
+  <div class="flex flex-wrap items-center gap-2">
+    <p class="ff-noto text-xs text-[var(--muted)]">{{ farmacia().tipoDescricao }}</p>
+    @if (farmacia().zonaRural) {
+      <span class="ff-noto rounded-md bg-ink/5 px-2 py-0.5 text-xs text-[var(--muted)]">Zona rural</span>
+    }
+  </div>
+  <h3 class="ff-noto mt-1 text-lg font-semibold tracking-[-0.02em] text-[var(--ink)]">
+    {{ farmacia().nome }}
+  </h3>
+  <p class="ff-noto mt-2 text-sm text-[var(--muted)]">
+    {{ farmacia().endereco }}, {{ farmacia().bairro }}
+  </p>
+  <p class="ff-noto mt-1 text-sm text-[var(--faint)]">{{ farmacia().horario }}</p>
+  <p class="ff-noto mt-auto pt-4 text-xs text-[var(--ink)]">Ver endereço</p>
+</button>

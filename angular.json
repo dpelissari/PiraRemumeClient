@@ -7,7 +7,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "MedClient": {
+    "PiraRemumeClient": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -57,10 +57,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "MedClient:build:production"
+              "buildTarget": "PiraRemumeClient:build:production"
             },
             "development": {
-              "buildTarget": "MedClient:build:development"
+              "buildTarget": "PiraRemumeClient:build:development"
             }
           },
           "defaultConfiguration": "development"

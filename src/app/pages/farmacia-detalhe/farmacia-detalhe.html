@@ -1,0 +1,128 @@
+<section class="hero py-12 md:py-16">
+  <div class="container mx-auto max-w-3xl px-4">
+    <a
+      routerLink="/farmacias"
+      class="ff-noto mb-6 inline-flex text-sm text-faint hover:text-[var(--cor-primaria)]"
+    >
+      Todas as farmácias
+    </a>
+
+    @if (carregando()) {
+      <div class="space-y-3">
+        <div class="h-8 w-64 animate-pulse rounded-lg bg-ink/10"></div>
+        <div class="h-5 w-40 animate-pulse rounded-lg bg-ink/10"></div>
+      </div>
+    } @else if (naoEncontrado()) {
+      <p class="ff-noto text-xl text-[var(--cor-primaria)]">Não achamos essa farmácia.</p>
+      <p class="ff-noto mt-2 text-sm text-muted">Volte para a lista e escolha outra unidade.</p>
+    } @else if (erro()) {
+      <div class="rounded-lg bg-surface px-4 py-6 text-red-700 dark:text-red-400">
+        <p class="ff-noto">{{ erro() }}</p>
+        <button
+          type="button"
+          class="ff-noto mt-3 rounded-lg bg-btn px-4 py-2 text-sm font-medium text-btn-fg"
+          (click)="recarregar()"
+        >
+          Tentar de novo
+        </button>
+      </div>
+    } @else if (farmacia(); as unidade) {
+      <div class="flex flex-wrap items-center gap-2">
+        <p class="ff-noto text-sm text-faint">{{ unidade.tipoDescricao }}</p>
+        @if (unidade.zonaRural) {
+          <span class="ff-noto rounded-lg bg-ink/5 px-2 py-0.5 text-xs text-muted">Zona rural</span>
+        }
+      </div>
+      <h1 class="ff-noto mt-1 text-3xl font-semibold tracking-tight text-[var(--cor-primaria)] md:text-4xl">
+        {{ unidade.nome }}
+      </h1>
+      @if (fonte(); as origem) {
+        <p class="ff-noto mt-3 text-sm text-faint">
+          Informações da
+          <a
+            class="text-[var(--cor-primaria)] hover:underline"
+            [href]="origem.url"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            página da Prefeitura
+          </a>
+          , atualizadas em {{ formatarData(origem.publicadoEm) }}
+        </p>
+      }
+    }
+  </div>
+</section>
+
+@if (!carregando() && farmacia(); as unidade) {
+  <section class="py-8 md:py-10">
+    <div class="container mx-auto max-w-3xl space-y-3 px-4">
+      <article class="rounded-lg bg-surface p-5 shadow-[var(--elev)]">
+        <p class="ff-noto text-xs text-faint">Endereço</p>
+        <p class="ff-noto mt-1 text-base text-ink">
+          {{ unidade.endereco }}, {{ unidade.bairro }}, Piracicaba
+        </p>
+        <a
+          class="ff-noto mt-3 inline-flex text-sm text-[var(--cor-primaria)] hover:underline"
+          [href]="mapsHref(unidade)"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Abrir no mapa
+        </a>
+      </article>
+
+      <article class="rounded-lg bg-surface p-5 shadow-[var(--elev)]">
+        <p class="ff-noto text-xs text-faint">Funcionamento</p>
+        <p class="ff-noto mt-1 text-base text-ink">{{ unidade.horario }}</p>
+      </article>
+
+      @if (unidade.telefone) {
+        <article class="rounded-lg bg-surface p-5 shadow-[var(--elev)]">
+          <p class="ff-noto text-xs text-faint">Contato</p>
+          <p class="ff-noto mt-1 text-base text-ink">
+            <a class="hover:underline" [href]="telHref(unidade.telefone)">
+              {{ formatarTelefone(unidade.telefone) }}
+            </a>
+            @if (unidade.whatsapp) {
+              <span class="text-faint">, WhatsApp</span>
+            }
+          </p>
+          @if (unidade.whatsapp) {
+            <a
+              class="ff-noto mt-3 inline-flex text-sm text-[var(--cor-primaria)] hover:underline"
+              [href]="whatsappHref(unidade.telefone)"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Conversar no WhatsApp
+            </a>
+          }
+        </article>
+      }
+
+      @if (unidade.unidadesReferencia.length > 0) {
+        <article class="rounded-lg bg-surface p-5 shadow-[var(--elev)]">
+          <p class="ff-noto text-xs text-faint">Quem esta farmácia atende</p>
+          <p class="ff-noto mt-1 text-sm leading-relaxed text-muted">
+            Atende quem é destas unidades.
+          </p>
+          <ul class="mt-3 flex flex-wrap gap-2">
+            @for (referencia of unidade.unidadesReferencia; track referencia) {
+              <li class="rounded-lg bg-ink/5 px-3 py-1 text-sm text-muted">
+                {{ referencia }}
+              </li>
+            }
+          </ul>
+        </article>
+      }
+
+      @if (unidade.observacao) {
+        <article class="rounded-lg bg-surface p-5 shadow-[var(--elev)]">
+          <p class="ff-noto text-xs text-faint">Observação</p>
+          <p class="ff-noto mt-1 text-sm leading-relaxed text-muted">{{ unidade.observacao }}</p>
+        </article>
+      }
+    </div>
+  </section>
+}

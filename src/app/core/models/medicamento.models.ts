@@ -1,17 +1,38 @@
-import { ClasseTerapeutica } from "../enums/classeTerapeutica";
-import { FormaFarmaceutica } from "../enums/formaFarmaceutica";
-import { Fabricante } from "./fabricante.models";
+export type AbrangenciaDisponibilidade = 'TodasAsFarmaciasMunicipais' | 'Restrito';
+export type TipoFiltroMedicamento = 'nome' | 'grupo';
 
-/** Valores de `tipo` aceitos por GET /medicamentos */
-export type TipoFiltroMedicamento = 'nome' | 'classeTerapeutica';
+export interface RemumeFonte {
+  nome: string;
+  publicadoEm: string;
+  url: string;
+}
 
-// Formato do JSON retornado por GET /medicamentos
+export interface UnidadeFarmacia {
+  id: string;
+  nome: string;
+  slug: string;
+}
+
+export interface Apresentacao {
+  id: string;
+  descricao: string;
+  abrangencia: AbrangenciaDisponibilidade;
+  abrangenciaDescricao: string;
+  observacao: string | null;
+  unidades: UnidadeFarmacia[];
+}
+
 export interface Medicamento {
   id: string;
   nome: string;
-  formaFarmaceutica: FormaFarmaceutica;
-  classeTerapeutica: ClasseTerapeutica;
-  fornecidoPeloSUS: boolean;
-  fabricanteId: string;
-  fabricante: Fabricante;
+  grupoFarmacologico: string;
+  classeTerapeutica: string;
+  apresentacoes: Apresentacao[];
+  todasAsFarmacias: boolean;
+  algumaRestrita: boolean;
+}
+
+export interface MedicamentoDetalheResponse {
+  medicamento: Medicamento;
+  fonte: RemumeFonte;
 }

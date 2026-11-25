@@ -3,7 +3,7 @@ import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { catchError, of, Subject, switchMap } from 'rxjs';
 import { CardMedicamento } from '../card-medicamento/card-medicamento';
 import { MedicamentoService } from '../../app/core/services/medicamento.service';
-import { Medicamento, TipoFiltroMedicamento } from '../../app/core/models/medicamento.models';
+import { Medicamento, RemumeFonte, TipoFiltroMedicamento } from '../../app/core/models/medicamento.models';
 
 @Component({
   selector: 'app-lista-medicamentos',
@@ -17,14 +17,14 @@ export class ListaMedicamentos {
 
   termo = input('');
   tipo = input<TipoFiltroMedicamento>('nome');
+  titulo = input('Medicamentos');
 
   medicamentos = signal<Medicamento[]>([]);
+  fonte = signal<RemumeFonte | null>(null);
   pagina = signal(1);
   total = signal(0);
   totalPaginas = signal(1);
-  /** Só true na 1ª carga — evita trocar a grade por skeleton ao paginar */
   carregandoInicial = signal(true);
-  /** True em qualquer request (inclui troca de página) */
   carregando = signal(false);
   erro = signal<string | null>(null);
 
@@ -39,15 +39,18 @@ export class ListaMedicamentos {
         switchMap((pagina) => {
           this.carregando.set(true);
           this.erro.set(null);
-          return this.medicamentoService
-            .listar(pagina, this.tamanhoPagina, this.termo(), this.tipo())
-            .pipe(
-              catchError((err) => {
-                this.erro.set('Não foi possível carregar os medicamentos.');
-                console.error(err);
-                return of(null);
-              }),
-            );
+          return this.medicamentoService.listar(pagina, this.tamanhoPagina, this.termo(), this.tipo()).pipe(
+            catchError((err) => {
+              const status = err?.status;
+              this.erro.set(
+                status === 0
+                  ? 'Não deu para carregar a lista agora. Veja se a API está no ar e tente de novo.'
+                  : 'Não deu para carregar os medicamentos agora.',
+              );
+              console.error(err);
+              return of(null);
+            }),
+          );
         }),
         takeUntilDestroyed(),
       )
@@ -57,6 +60,7 @@ export class ListaMedicamentos {
         if (!resultado) return;
 
         this.medicamentos.set(resultado.itens ?? []);
+        this.fonte.set(resultado.fonte ?? null);
         this.pagina.set(resultado.pagina);
         this.total.set(resultado.total);
         this.totalPaginas.set(

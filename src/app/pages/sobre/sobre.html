@@ -1,0 +1,100 @@
+<section class="hero py-16 md:py-24">
+  <div class="container mx-auto max-w-2xl px-4">
+    <h1 class="ff-noto text-[2.15rem] font-semibold leading-[1.1] tracking-[-0.03em] text-[var(--ink)] md:text-5xl">
+      Sobre o PiraREMUME
+    </h1>
+    <p class="ff-noto mt-6 max-w-xl text-[15px] leading-relaxed text-[var(--muted)]">
+      Este site é um catálogo da lista de medicamentos da rede pública de Piracicaba.
+      Você busca pelo nome, vê se o item faz parte da REMUME e encontra o endereço
+      da farmácia do seu posto.
+    </p>
+  </div>
+</section>
+
+<section class="pb-16 md:pb-24">
+  <div class="container mx-auto max-w-2xl px-4">
+    <article>
+      <h2 class="ff-noto text-base font-medium text-[var(--ink)]">O que é a REMUME</h2>
+      <p class="ff-noto mt-3 text-[15px] leading-relaxed text-[var(--muted)]">
+        REMUME é a Relação Municipal de Medicamentos Essenciais. É o elenco da
+        cidade: os medicamentos que a Prefeitura se compromete a oferecer na rede
+        pública, alinhado à lista nacional, a Rename.
+      </p>
+      <p class="ff-noto mt-3 text-[15px] leading-relaxed text-[var(--muted)]">
+        Estar nesta lista não é o mesmo que estar na prateleira. O estoque do dia
+        só a farmácia confirma.
+      </p>
+    </article>
+
+    <article class="mt-12">
+      <h2 class="ff-noto text-base font-medium text-[var(--ink)]">De onde vêm as informações</h2>
+      <p class="ff-noto mt-3 text-[15px] leading-relaxed text-[var(--muted)]">
+        Os medicamentos vêm do PDF da REMUME publicado no site da Prefeitura, hoje a
+        versão de 2023. Os endereços vêm da página de farmácias municipais. Este
+        projeto não cria a lista. Só organiza o que já está público para ficar
+        mais fácil de consultar.
+      </p>
+      <ul class="mt-5 space-y-2">
+        <li>
+          <a
+            class="ff-noto text-[15px] text-[var(--ink)] underline decoration-[var(--line)] underline-offset-2 hover:decoration-[var(--ink)]"
+            href="https://piracicaba.sp.gov.br/servicos/relacao-municipal-de-medicamentos-essenciais-remume/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Página da REMUME na Prefeitura
+          </a>
+        </li>
+        <li>
+          <a
+            class="ff-noto text-[15px] text-[var(--ink)] underline decoration-[var(--line)] underline-offset-2 hover:decoration-[var(--ink)]"
+            href="https://piracicaba.sp.gov.br/wp-content/uploads/2024/08/REMUME-2023-Grupo-Farmacologico-07-24.pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            PDF da REMUME 2023
+          </a>
+        </li>
+        <li>
+          <a
+            class="ff-noto text-[15px] text-[var(--ink)] underline decoration-[var(--line)] underline-offset-2 hover:decoration-[var(--ink)]"
+            href="https://piracicaba.sp.gov.br/servicos/farmacias-municipais/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Farmácias municipais
+          </a>
+        </li>
+      </ul>
+    </article>
+
+    <article class="mt-12">
+      <h2 class="ff-noto text-base font-medium text-[var(--ink)]">Onde cada medicamento sai</h2>
+      <p class="ff-noto mt-3 text-[15px] leading-relaxed text-[var(--muted)]">
+        A maior parte da lista está disponível em toda a rede: o medicamento é
+        dispensado na UBS ou USF do bairro. Alguns itens, ou só algumas formas,
+        ficam em farmácias específicas, como certas UBS ou o CEDIC.
+      </p>
+    </article>
+
+    <article class="mt-12">
+      <h2 class="ff-noto text-base font-medium text-[var(--ink)]">O que este site não faz</h2>
+      <p class="ff-noto mt-3 text-[15px] leading-relaxed text-[var(--muted)]">
+        Não é um canal da Prefeitura. Não mostra se o medicamento está disponível
+        agora. Não marca consulta e não substitui o atendimento no posto ou na
+        farmácia.
+      </p>
+      <p class="ff-noto mt-3 text-[15px] leading-relaxed text-[var(--muted)]">
+        Para retirar, quem mora em Piracicaba leva a receita em dia e o cartão de
+        saúde da cidade, válido, com o número da matrícula. Vale receita do posto,
+        de convênio ou de médico particular. O medicamento sai na farmácia municipal
+        do seu posto, a UBS ou USF do bairro.
+      </p>
+    </article>
+
+    <p class="ff-noto mt-12 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+      <a routerLink="/" class="text-[var(--ink)] hover:underline">Buscar medicamentos</a>
+      <a routerLink="/farmacias" class="text-[var(--ink)] hover:underline">Ver farmácias</a>
+    </p>
+  </div>
+</section>

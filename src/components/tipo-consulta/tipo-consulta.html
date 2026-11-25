@@ -1,19 +1,19 @@
-<div class="grid grid-cols-1 gap-1 rounded-xl border border-slate-200 bg-white p-1 shadow-sm sm:grid-cols-2">
+<div class="grid grid-cols-2 gap-1 rounded-lg bg-ink/5 p-1">
   <button
     type="button"
-    class="tab ff-noto rounded-lg px-3 py-2.5 text-sm font-medium transition sm:text-base"
+    class="tab ff-noto rounded-md px-3 py-2 text-sm font-medium"
     [class.ativo]="buscaAtiva() === 'medicamento'"
     (click)="setTipoBusca('medicamento')"
   >
-    Nome do Medicamento
+    Nome
   </button>
 
   <button
     type="button"
-    class="tab ff-noto rounded-lg px-3 py-2.5 text-sm font-medium transition sm:text-base"
-    [class.ativo]="buscaAtiva() === 'classe-terapeutica'"
-    (click)="setTipoBusca('classe-terapeutica')"
+    class="tab ff-noto rounded-md px-3 py-2 text-sm font-medium"
+    [class.ativo]="buscaAtiva() === 'grupo'"
+    (click)="setTipoBusca('grupo')"
   >
-    Categoria Terapêutica
+    Grupo
   </button>
 </div>

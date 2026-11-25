@@ -1,17 +1,28 @@
 import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 import { Medicamento } from '../../app/core/models/medicamento.models';
-import { FormaFarmaceuticaPipe } from '../../app/pipes/forma-farmaceutica-pipe';
-import { ClasseTerapeuticaPipe } from '../../app/pipes/classe-terapeutica-pipe';
 
 @Component({
   selector: 'app-card-medicamento',
-  imports: [FormaFarmaceuticaPipe, ClasseTerapeuticaPipe],
+  imports: [RouterLink],
   templateUrl: './card-medicamento.html',
   styleUrl: './card-medicamento.css',
 })
 export class CardMedicamento {
+  medicamento = input.required<Medicamento>();
 
-  medicamento = input<Medicamento>();
+  rotuloOnde(): string {
+    const med = this.medicamento();
+    if (med.todasAsFarmacias) {
+      return 'Disponível em toda a rede';
+    }
+    if (med.apresentacoes.every((item) => item.abrangencia === 'Restrito')) {
+      return 'Disponível em algumas farmácias';
+    }
+    return 'Algumas formas em farmácias específicas';
+  }
 
-
+  soEmAlgumas(): boolean {
+    return !this.medicamento().todasAsFarmacias;
+  }
 }

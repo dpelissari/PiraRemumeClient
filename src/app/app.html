@@ -1,7 +1,7 @@
-<main class="main">
+<div class="flex min-h-dvh flex-col">
   <app-nav-menu />
-  <app-painel-consulta (consultou)="aplicarConsulta($event)" />
-  <app-lista-medicamentos [termo]="filtroTermo()" [tipo]="filtroTipo()" />
+  <main class="flex-1 pb-20">
+    <router-outlet />
+  </main>
   <app-rodape />
-</main>
-<router-outlet />
+</div>

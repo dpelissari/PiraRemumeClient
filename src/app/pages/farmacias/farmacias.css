@@ -1,0 +1,37 @@
+:host {
+  display: block;
+}
+
+.hero-farmacias {
+  --ink: #111a4a;
+  --muted: rgb(17 26 74 / 0.8);
+  --faint: rgb(17 26 74 / 0.45);
+  --surface: #ffffff;
+  --line: rgb(17 26 74 / 0.12);
+  --btn: #111a4a;
+  --btn-fg: #ffffff;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: 36rem;
+  background-color: #f1d801;
+  background-image: radial-gradient(
+    70% 80% at 85% 45%,
+    rgb(255 255 255 / 0.28),
+    transparent 62%
+  );
+}
+
+.hero-farmacias::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 3.5rem;
+  background: linear-gradient(180deg, transparent, var(--canvas));
+  pointer-events: none;
+}
+
+.hero-farmacias .container {
+  position: relative;
+  z-index: 1;
+}

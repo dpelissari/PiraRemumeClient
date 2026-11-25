@@ -1,31 +1,33 @@
 <div class="nav-menu ff-noto">
-  <div class="container mx-auto flex justify-between items-center px-4 py-2">
-    <div class="flex gap-4 items-center">
-      <span routerLink="" routerLinkActive="active" class="logo flex items-center">MC</span>
-      <span routerLink="" routerLinkActive="active" class="appname">MedClient</span>
-      <span class="badge text-sm hidden sm:inline-block">Fármacia Popular</span>
+  <div class="container mx-auto flex items-center justify-between px-4 py-4">
+    <a routerLink="/" class="wordmark">
+      <img src="logo.png" width="28" height="28" alt="" />
+      PiraREMUME
+    </a>
+    <div class="flex items-center gap-3">
+      <app-seletor-tema />
+      <button
+        type="button"
+        class="p-2 text-ink md:hidden"
+        (click)="menuAberto.set(!menuAberto())"
+        aria-label="Abrir menu"
+      >
+        <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7h16M4 12h16M4 17h16" />
+        </svg>
+      </button>
+      <nav class="hidden items-center gap-7 text-[13px] md:flex">
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Consulta</a>
+        <a routerLink="/farmacias" routerLinkActive="active">Farmácias</a>
+        <a routerLink="/sobre" routerLinkActive="active">Sobre</a>
+      </nav>
     </div>
-    <button
-      type="button"
-      class="md:hidden p-2"
-      (click)="menuAberto.set(!menuAberto())"
-      aria-label="Abrir menu">
-      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-          d="M4 6h16M4 12h16M4 18h16" />
-      </svg>
-    </button>
-    <nav class="hidden md:flex gap-4">
-      <a routerLink="/medicamentos" routerLinkActive="active" class="font-medium text-lg">Medicamentos</a>
-      <a routerLink="/fabricantes" routerLinkActive="active" class="font-medium text-lg">Fabricantes</a>
-      <a routerLink="/principios-ativos" routerLinkActive="active" class="font-medium text-lg">Princípios ativos</a>
-    </nav>
   </div>
   @if (menuAberto()) {
-    <nav class="md:hidden flex flex-col gap-2 px-4 pb-4">
-      <a routerLink="/medicamentos" routerLinkActive="active" class="font-medium text-lg" (click)="menuAberto.set(false)">Medicamentos</a>
-      <a routerLink="/fabricantes" routerLinkActive="active" class="font-medium text-lg" (click)="menuAberto.set(false)">Fabricantes</a>
-      <a routerLink="/principios-ativos" routerLinkActive="active" class="font-medium text-lg" (click)="menuAberto.set(false)">Princípios ativos</a>
+    <nav class="flex flex-col gap-3 px-4 pb-4 text-sm md:hidden">
+      <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }" (click)="menuAberto.set(false)">Consulta</a>
+      <a routerLink="/farmacias" routerLinkActive="active" (click)="menuAberto.set(false)">Farmácias</a>
+      <a routerLink="/sobre" routerLinkActive="active" (click)="menuAberto.set(false)">Sobre</a>
     </nav>
   }
 </div>

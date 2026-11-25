@@ -1,0 +1,104 @@
+<section class="hero-farmacias flex min-h-[34rem] items-center">
+  <div class="container mx-auto px-4 py-16 md:py-20">
+    <div class="max-w-lg">
+    <h1 class="ff-noto text-[2.15rem] font-semibold leading-[1.1] tracking-[-0.03em] text-[var(--ink)] md:text-5xl">
+      Farmácias municipais
+    </h1>
+    <p class="ff-noto mt-4 max-w-xl text-[15px] leading-relaxed text-[var(--ink)]/80">
+      O medicamento da REMUME sai na farmácia do seu posto, a UBS ou USF do bairro.
+      Aqui estão os endereços da rede pública. Leve a receita em dia e o cartão
+      de saúde.
+    </p>
+    @if (fonte(); as origem) {
+      <p class="ff-noto mt-3 text-sm text-[var(--ink)]/65">
+        Informações da
+        <a
+          class="text-[var(--ink)] underline decoration-[rgb(17_26_74_/_0.25)] underline-offset-2 hover:decoration-[var(--ink)]"
+          [href]="origem.url"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          página da Prefeitura
+        </a>
+        , atualizadas em {{ formatarData(origem.publicadoEm) }}
+      </p>
+    }
+
+    <label class="mt-8 block">
+      <span class="sr-only">Buscar farmácia pelo bairro ou nome</span>
+      <input
+        class="ff-noto w-full rounded-lg border border-line bg-surface px-5 py-3 text-ink shadow-[var(--elev)] placeholder:text-faint focus:border-[var(--ink)] focus:outline-none"
+        type="search"
+        name="termo"
+        [value]="termo()"
+        placeholder="Bairro, rua ou nome da farmácia"
+        (input)="aoDigitar($event)"
+      />
+    </label>
+    </div>
+  </div>
+</section>
+
+<section class="py-8 md:py-10">
+  <div class="container mx-auto px-4">
+    @if (carregando()) {
+      <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        @for (_ of [1, 2, 3, 4, 5, 6]; track $index) {
+          <div class="h-40 animate-pulse rounded-lg bg-surface"></div>
+        }
+      </div>
+    } @else if (erro()) {
+      <div class="rounded-lg bg-surface px-4 py-6 text-red-700 dark:text-red-400">
+        <p class="ff-noto">{{ erro() }}</p>
+        <button
+          type="button"
+          class="ff-noto mt-3 rounded-lg bg-btn px-4 py-2 text-sm font-medium text-btn-fg"
+          (click)="recarregar()"
+        >
+          Tentar de novo
+        </button>
+      </div>
+    } @else if (farmacias().length === 0) {
+      <div class="rounded-lg bg-surface px-4 py-12 text-center">
+        <p class="ff-noto text-muted">Nenhuma farmácia com esse nome.</p>
+        <p class="ff-noto mt-1 text-sm text-faint">Tente o bairro ou o nome da unidade.</p>
+      </div>
+    } @else {
+      @if (atencaoBasica().length > 0) {
+        <div class="mb-6 flex items-baseline justify-between gap-3">
+          <h2 class="ff-noto text-base font-medium text-[var(--cor-primaria)]">Atenção básica</h2>
+          <p class="ff-noto text-sm text-faint">{{ atencaoBasica().length }}</p>
+        </div>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          @for (farmacia of atencaoBasica(); track farmacia.id) {
+            <app-card-farmacia [farmacia]="farmacia" (abrir)="abrirEndereco(farmacia)" />
+          }
+        </div>
+      }
+
+      @if (outras().length > 0) {
+        <div class="mb-6 mt-10 flex items-baseline justify-between gap-3">
+          <h2 class="ff-noto text-base font-medium text-[var(--cor-primaria)]">Outras unidades</h2>
+          <p class="ff-noto text-sm text-faint">{{ outras().length }}</p>
+        </div>
+        <p class="ff-noto mb-4 max-w-2xl text-sm leading-relaxed text-muted">
+          Alto custo e CEDIC não entregam a lista comum da REMUME. Só alguns
+          medicamentos ficam nessas unidades.
+        </p>
+        <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          @for (farmacia of outras(); track farmacia.id) {
+            <app-card-farmacia [farmacia]="farmacia" (abrir)="abrirEndereco(farmacia)" />
+          }
+        </div>
+      }
+    }
+
+    <p class="ff-noto mt-10 text-sm text-faint">
+      <a routerLink="/" class="text-[var(--cor-primaria)] hover:underline">Voltar para a página inicial</a>
+    </p>
+  </div>
+</section>
+
+@if (farmaciaAberta(); as unidade) {
+  <app-modal-farmacia [farmacia]="unidade" (fechou)="fecharEndereco()" />
+}
