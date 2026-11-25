@@ -6,6 +6,8 @@ O projeto não inventa essa lista. Organiza o que já está no site da Prefeitur
 
 Este repositório é o **site**, em Angular 22. Ele não guarda o catálogo. Tudo que a pessoa vê vem da [PiraREMUME (API)](https://github.com/dpelissari/MedMinimalAPI). Sem a API no ar, a consulta não funciona.
 
+A versão publicada está em [pira-remume-client-alpha.vercel.app](https://pira-remume-client-alpha.vercel.app/). A primeira carga pode demorar se a API no Render estiver dormindo.
+
 Fontes oficiais (as mesmas da API):
 
 - [Página da REMUME](https://piracicaba.sp.gov.br/servicos/relacao-municipal-de-medicamentos-essenciais-remume/)
